@@ -15,7 +15,7 @@ def SeletorDeOpcoes():
     while acao != "0":
         os.system("cls") or None
         AcoesPossiveis()
-        acao = input("\nDigite o número referente à ação desejada:")
+        acao = input("\nDigite o número referente à ação desejada: ")
         match acao:
             case "0" : pass
             case "1" : Cadastro() 
@@ -40,36 +40,37 @@ def Cadastro():
         multiple = False,
         filetypes = tiposDeArquivos
     )
+    if nomeDoArquivo != "":
+        novoAno = "-"
+        while novoAno != "0":
 
-    novoAno = "-"
-    while novoAno != "0":
+            if novoAno == "-":
+                print("\nDados da obra")
+            else:
+                print("Adicionar nova obra")
+                print("Digite 0 na pergunta abaixo para sair")
+            
+            novoAno = input("Ano da conclusão da obra: ")
+            
+            if novoAno != "0":
+                novoMes = input("Mês da conclusão da obra: ")
+                novoAutor = input("Autor da obra: ")
+                novoNome = input("Nome da obra: ")
+                novoEstilo = input("Estilo da obra: ")
+                novoValor = input("Valor da obra: ")
+                novaURL = input("Url da foto: ")
 
-        if novoAno == "-":
-            print("Dados da obra")
-        else:
-            print("Adicionar nova obra")
-            print("Digite 0 na pergunta abaixo para sair")
-        
-        novoAno = input("Ano da conclusão da obra: ")
-        
-        if novoAno != "0":
-            novoMes = input("Mês da conclusão da obra: ")
-            novoAutor = input("Autor da obra: ")
-            novoNome = input("Nome da obra: ")
-            novoEstilo = input("Estilo da obra: ")
-            novoValor = input("Valor da obra: ")
-            novaURL = input("Url da foto: ")
+                obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=True)
 
-            obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=True)
+                obra.preencherCampos(novoAno, novoMes, novoAutor, novoNome, novoEstilo, novoValor, novaURL)
 
-            obra.preencherCampos(novoAno, novoMes, novoAutor, novoNome, novoEstilo, novoValor, novaURL)
+                obra.gravarCamposNoArquivo()
 
-            obra.gravarCamposNoArquivo()
+                print("\nObra adicionada com sucesso")
+                input("pressione [enter] para continuar")
+                os.system('cls') or None
 
-            print("Obra adicionada com sucesso")
-            input("pressione [enter] para continuar")
-
-    obra.fecharArquivo()   
+        obra.fecharArquivo()   
 
 def Listagem():
     from tkinter import filedialog
@@ -94,5 +95,5 @@ def Listagem():
 
 
 
-while __name__ == "__main__":
+if __name__ == "__main__":
     SeletorDeOpcoes()

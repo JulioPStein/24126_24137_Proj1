@@ -21,24 +21,28 @@ class Obra:
 
     def lerCamposDoArquivo(self):
         if not self._abertoParaGravacao:
-            # arrumar
             self.arquivinho = open(self._arquivo, "r")
-            self.linha = self.arquivinho.readline()
-            self.AnoDaObra = self.linha[:4].rstrip()
-            self.MesDaObra = self.linha[7:9].rstrip()
-            self.AutorDaObra = self.linha[53:73].strip()
-            self.NomeDaObra = self.linha[30:50].strip()
-            self.Estilo = self.linha[12:27].rstrip()
-            self.ValorEstimado = None           #ver como pegar apenas o valor estimado e colocar em uma vaiável
-            self.urlFoto = None             
+            valores = [self.AnoDaObra, self.MesDaObra, self.Estilo, self.NomeDaObra, self.AutorDaObra, self.ValorEstimado, self.urlFoto]
+            linha = "-"
+            while linha != "":
+                linha = self.arquivinho.readline()
+                if linha != "":
+                    for valor in valores:
+                        valor = linha
+                        self.arquivinho.readline()
+
+                    
 
 
     def gravarCamposNoArquivo(self):
-        # arrumar
         if self._abertoParaGravacao:
             self.arquivinho = open(self._arquivo, "a")
-            self.linha = self.AnoDaObra.ljust(4, " ") + "   " + self. MesDaObra.ljust(2, " ") + "   " + self.Estilo.ljust(15, " ") + "   " + self.NomeDaObra.ljust(20, " ") + "   " + self.AutorDaObra.ljust(20, " ") + "   " + self.ValorEstimado + "    " + self.urlFoto
-            self.arquivinho.write(f"\n{self.linha}")
+            linha = "-"
+            valores = [self.AnoDaObra, self.MesDaObra, self.Estilo, self.NomeDaObra, self.AutorDaObra, self.ValorEstimado, self.urlFoto]
+            
+            for item in valores:
+                self.arquivinho.write(f"{item}\n")
+            
             
 
 
