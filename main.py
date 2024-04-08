@@ -41,24 +41,60 @@ def Cadastro():
         filetypes = tiposDeArquivos
     )
 
+    novoAno = "-"
+    while novoAno != "0":
 
-    print("Dados da obra")
-    novoAno = input("Ano da conclusão da obra: ")
-    novoMes = input("Mês da conclusão da obra: ")
-    novoAutor = input("Autor da obra: ")
-    novoNome = input("Nome da obra: ")
-    novoEstilo = input("Estilo da obra: ")
-    novoValor = input("Valor da obra: ")
-    novaURL = input("Url da foto: ")
+        if novoAno == "-":
+            print("Dados da obra")
+        else:
+            print("Adicionar nova obra")
+            print("Digite 0 na pergunta abaixo para sair")
+        novoAno = input("Ano da conclusão da obra: ")
+        
+        if novoAno != "0":
+            novoMes = input("Mês da conclusão da obra: ")
+            novoAutor = input("Autor da obra: ")
+            novoNome = input("Nome da obra: ")
+            novoEstilo = input("Estilo da obra: ")
+            novoValor = input("Valor da obra: ")
+            novaURL = input("Url da foto: ")
 
-    obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=True)
+            obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=True)
 
-    obra.preencherCampos(novoAno, novoMes, novoAutor, novoNome, novoEstilo, novoValor, novaURL)
+            obra.preencherCampos(novoAno, novoMes, novoAutor, novoNome, novoEstilo, novoValor, novaURL)
 
-    obra.gravarCamposNoArquivo()
+            obra.gravarCamposNoArquivo()
+
+            print("Obra adicionada com sucesso")
+            input("pressione [enter] para continuar")
+
+    obra.fecharArquivo()   
+
+def Listagem():
+    from tkinter import filedialog
+    import galeriaVirtuarte
+
+    tiposDeArquivos = (   #VER SE SÃO ESSES  OS TIPOS DESEJADOS
+        ("Arquivos de texto", "*.txt"),
+        ("Arquivos JSON", "*.json"),
+        ("Qualquer aqruivo", "*.*")
+    )
+
+    nomeDoArquivo = filedialog.askopenfilename(
+        title="Selecione o arquivo desejado",
+        initialdir= r"c:\temp",
+        multiple = False,
+        filetypes = tiposDeArquivos
+    )
+
+    obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=False)
+
+    obra.lerCamposDoArquivo()
+
+
+
 
     
-
 
 
 while __name__ == "__main__":

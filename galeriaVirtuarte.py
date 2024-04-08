@@ -7,6 +7,7 @@ class Obra:
         self.Estilo = ""
         self.ValorEstimado = 0.0
         self.urlFoto = ""
+        self.arquivvo = ""
         self._arquivo = nomeArq
         self._abertoParaGravacao = paraGravacao
 
@@ -19,13 +20,24 @@ class Obra:
         return self._arquivo
 
     def lerCamposDoArquivo(self):
-        pass
+        if not self._abertoParaGravacao:
+            self.arquivo = open(self._arquivo, "r")
+            self.linha = self.arquivo.readline()
+            self.AnoDaObra = self.linha[:4].rstrip()
+            self.MesDaObra = self.linha[7:9].rstrip()
+            self.AutorDaObra = self.linha[53:73].strip()
+            self.NomeDaObra = self.linha[30:50].strip()
+            self.Estilo = self.linha[12:27].rstrip()
+            self.ValorEstimado = None           #ver como pegar apenas o valor estimado e colocar em uma vaiável
+            self.urlFoto = None             
+
 
     def gravarCamposNoArquivo(self):
         if self._abertoParaGravacao:
-            arquivo = open(self._arquivo, "a")
-            self.linha = self.AnoDaObra.ljust(4, " ") + "   " + self. MesDaObra.ljust(2, " ") + "   " + self.Estilo.ljust(15, " ") + "   " + self.NomeDaObra.ljust(20, " ") + "   " + self.AutorDaObra.ljust(20, " ") + "   " + self.ValorEstimado + "   " + self.urlFoto
-            arquivo.write(f"\n{self.linha}")
+            self.arquivo = open(self._arquivo, "a")
+            self.linha = self.AnoDaObra.ljust(4, " ") + "   " + self. MesDaObra.ljust(2, " ") + "   " + self.Estilo.ljust(15, " ") + "   " + self.NomeDaObra.ljust(20, " ") + "   " + self.AutorDaObra.ljust(20, " ") + "   " + self.ValorEstimado + "    " + self.urlFoto
+            self.arquivo.write(f"\n{self.linha}")
+            
 
 
     def preencherCampos(self, novoAno, novoMes, novoAutor, novoNome, novoEstilo, novoValor, novaURL : str):
@@ -41,7 +53,7 @@ class Obra:
 
 
     def fecharArquivo(self):
-        pass
+        self.arquivo.close()
 
     def __str__(self) -> str:
         pass
