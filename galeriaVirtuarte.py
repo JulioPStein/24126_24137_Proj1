@@ -5,7 +5,7 @@ class Obra:
         self.AutorDaObra = ""
         self.NomeDaObra = ""
         self.Estilo = ""
-        self.ValorEstimado = 0.0
+        self.ValorEstimado = 0.0 # 12 caracteres
         self.urlFoto = ""
         self.arquivvo = ""
         self._arquivo = nomeArq
@@ -21,29 +21,24 @@ class Obra:
 
     def lerCamposDoArquivo(self):
         if not self._abertoParaGravacao:
-            self.arquivinho = open(self._arquivo, "r")
-            valores = [self.AnoDaObra, self.MesDaObra, self.Estilo, self.NomeDaObra, self.AutorDaObra, self.ValorEstimado, self.urlFoto]
-            linha = "-"
-            while linha != "":
-                linha = self.arquivinho.readline()
-                if linha != "":
-                    for valor in valores:
-                        valor = linha
-                        self.arquivinho.readline()
+            self.arquivo = open(self._arquivo, "r")
+            self.linha = self.arquivo.readline()
+            self.AnoDaObra = self.linha[:4].rstrip()
+            self.MesDaObra = self.linha[4:6].rstrip()
+            self.Estilo = self.linha[6:21].rstrip()
+            self.NomeDaObra = self.linha[21:41].rstrip()
+            self.AutorDaObra = self.linha[41:61].rstrip()
+            self.ValorEstimado = self.linha[61:73].rstrip()
+            self.urlFoto = self.linhas[73:173].rstrip()
 
                     
 
 
     def gravarCamposNoArquivo(self):
         if self._abertoParaGravacao:
-            self.arquivinho = open(self._arquivo, "a")
-            linha = "-"
-            valores = [self.AnoDaObra, self.MesDaObra, self.Estilo, self.NomeDaObra, self.AutorDaObra, self.ValorEstimado, self.urlFoto]
-            
-            for item in valores:
-                self.arquivinho.write(f"{item}\n")
-            
-            
+            arquivo = open(self._arquivo, "a")
+            self.linha = self.AnoDaObra.ljust(4, " ") + self. MesDaObra.ljust(2, " ") + self.Estilo.ljust(15, " ") + self.NomeDaObra.ljust(20, " ") + self.AutorDaObra.ljust(20, " ") + self.ValorEstimado + self.urlFoto
+            arquivo.write(f"\n{self.linha}")
 
 
     def preencherCampos(self, novoAno, novoMes, novoAutor, novoNome, novoEstilo, novoValor, novaURL : str):
