@@ -21,8 +21,9 @@ class Obra:
 
     def lerCamposDoArquivo(self):
         if not self._abertoParaGravacao:
-            self.arquivo = open(self._arquivo, "r")
-            self.linha = self.arquivo.readline()
+            # arrumar
+            self.arquivinho = open(self._arquivo, "r")
+            self.linha = self.arquivinho.readline()
             self.AnoDaObra = self.linha[:4].rstrip()
             self.MesDaObra = self.linha[7:9].rstrip()
             self.AutorDaObra = self.linha[53:73].strip()
@@ -33,10 +34,11 @@ class Obra:
 
 
     def gravarCamposNoArquivo(self):
+        # arrumar
         if self._abertoParaGravacao:
-            self.arquivo = open(self._arquivo, "a")
+            self.arquivinho = open(self._arquivo, "a")
             self.linha = self.AnoDaObra.ljust(4, " ") + "   " + self. MesDaObra.ljust(2, " ") + "   " + self.Estilo.ljust(15, " ") + "   " + self.NomeDaObra.ljust(20, " ") + "   " + self.AutorDaObra.ljust(20, " ") + "   " + self.ValorEstimado + "    " + self.urlFoto
-            self.arquivo.write(f"\n{self.linha}")
+            self.arquivinho.write(f"\n{self.linha}")
             
 
 
@@ -53,7 +55,7 @@ class Obra:
 
 
     def fecharArquivo(self):
-        self.arquivo.close()
+        self.arquivinho.close()
 
     def __str__(self) -> str:
         pass

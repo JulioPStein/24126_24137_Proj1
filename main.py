@@ -31,7 +31,7 @@ def Cadastro():
     tiposDeArquivos = (   #VER SE SÃO ESSES  OS TIPOS DESEJADOS
         ("Arquivos de texto", "*.txt"),
         ("Arquivos JSON", "*.json"),
-        ("Qualquer aqruivo", "*.*")
+        ("Qualquer arquivo", "*.*")
     )
 
     nomeDoArquivo = filedialog.askopenfilename(
@@ -49,6 +49,7 @@ def Cadastro():
         else:
             print("Adicionar nova obra")
             print("Digite 0 na pergunta abaixo para sair")
+        
         novoAno = input("Ano da conclusão da obra: ")
         
         if novoAno != "0":
@@ -77,7 +78,7 @@ def Listagem():
     tiposDeArquivos = (   #VER SE SÃO ESSES  OS TIPOS DESEJADOS
         ("Arquivos de texto", "*.txt"),
         ("Arquivos JSON", "*.json"),
-        ("Qualquer aqruivo", "*.*")
+        ("Qualquer arquivo", "*.*")
     )
 
     nomeDoArquivo = filedialog.askopenfilename(
@@ -93,10 +94,5 @@ def Listagem():
 
 
 
-
-    
-
-
 while __name__ == "__main__":
     SeletorDeOpcoes()
-

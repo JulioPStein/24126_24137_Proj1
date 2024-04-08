@@ -1,7 +1,7 @@
-Ano da obra       -string[4]
-Mês da obra       -string[2]
-Estilo            -string[15]
-Nome da obra      -string[20]
-Autor da obra     -string[20]
-Valor estimado    -real
-urlFoto           -string[100]
+Ano da obra 
+Mês da obra 
+Estilo 
+Nome da obra 
+Autor da obra 
+Valor estimado 
+urlFoto 
