@@ -29,4 +29,7 @@ class Matematica:
                 calculo = mate.fatorial(n) / (mate.fatorial(k) * mate.fatorial(n-k))
                 linha = f"{linha}{calculo:6d}"
                 k += 1
-        n += 1
+            n += 1
+            lista.append(linha)
+        return lista
+    
