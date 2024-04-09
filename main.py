@@ -19,9 +19,9 @@ def SeletorDeOpcoes():
         match acao:
             case "0" : pass
             case "1" : Cadastro() 
-            case "2" : pass
+            case "2" : Listagem()
             case "3" : pass
-            case "4" : pass
+            case "4" : TrianguloPascal()
             case "" : pass #Qualquer coisa inválida para não voltar em loop sem explicar ao usuario?
 
 def Cadastro():
@@ -91,9 +91,26 @@ def Listagem():
 
     obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=False)
 
-    obra.lerCamposDoArquivo()
+    for linha in obra.lerCamposDoArquivo():
+        print(linha)
+
+    
+
+    input("pressione [enter] para continuar")
+    os.system('cls') or None
 
 
+def TrianguloPascal():
+    import mat
+    valorBase = int(input("Digite o valor da base: "))
+    tri = mat.Matematica(valorBase)
+
+    for linha in tri.triangulo_de_Pascal():
+        print(linha)
+
+    input("pressione [enter] para continuar")
+    os.system('cls') or None
+        
 
 if __name__ == "__main__":
     SeletorDeOpcoes()

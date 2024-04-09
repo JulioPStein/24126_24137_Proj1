@@ -17,7 +17,7 @@ class Matematica:
     
     def triangulo_de_Pascal(self):
         import mat
-        mate = mat.Matematica()
+        mate = mat.Matematica(self._numeroBase)
         L = self._numeroBase
         k = 0
         n = 0
@@ -25,9 +25,11 @@ class Matematica:
         lista = []
         while n < L:
             linha = ""
+            k = 0
             while k <= n:
+                
                 calculo = mate.fatorial(n) / (mate.fatorial(k) * mate.fatorial(n-k))
-                linha = f"{linha}{calculo:6d}"
+                linha = f"{linha}{calculo:6.0f}"
                 k += 1
             n += 1
             lista.append(linha)

@@ -7,7 +7,7 @@ class Obra:
         self.Estilo = ""
         self.ValorEstimado = 0.0 # 12 caracteres
         self.urlFoto = ""
-        self.arquivvo = ""
+        self.arquivinho = ""
         self._arquivo = nomeArq
         self._abertoParaGravacao = paraGravacao
 
@@ -21,23 +21,28 @@ class Obra:
 
     def lerCamposDoArquivo(self):
         if not self._abertoParaGravacao:
+            lista = []
             self.arquivo = open(self._arquivo, "r")
-            self.linha = self.arquivo.readline()
-            self.AnoDaObra = self.linha[:4].rstrip()
-            self.MesDaObra = self.linha[4:6].rstrip()
-            self.Estilo = self.linha[6:21].rstrip()
-            self.NomeDaObra = self.linha[21:41].rstrip()
-            self.AutorDaObra = self.linha[41:61].rstrip()
-            self.ValorEstimado = self.linha[61:73].rstrip()
-            self.urlFoto = self.linhas[73:173].rstrip()
+            self.linha = self.arquivo.readline()    
+            while self.linha != "":
+                
+                self.linha = self.arquivo.readline()
+                self.AnoDaObra = self.linha[:4].rstrip()
+                self.MesDaObra = self.linha[4:6].rstrip()
+                self.Estilo = self.linha[6:21].rstrip()
+                self.NomeDaObra = self.linha[21:41].rstrip()
+                self.AutorDaObra = self.linha[41:61].rstrip()
+                self.ValorEstimado = float(self.linha[61:73].rstrip())
+                self.urlFoto = self.linha[73:173].rstrip()
+                lista.append(str(self.AnoDaObra + self.MesDaObra + self.Estilo + self.NomeDaObra + self.AutorDaObra + str(self.ValorEstimado) + self.urlFoto))
 
-                    
+            return lista
 
 
     def gravarCamposNoArquivo(self):
         if self._abertoParaGravacao:
             arquivo = open(self._arquivo, "a")
-            self.linha = self.AnoDaObra.ljust(4, " ") + self. MesDaObra.ljust(2, " ") + self.Estilo.ljust(15, " ") + self.NomeDaObra.ljust(20, " ") + self.AutorDaObra.ljust(20, " ") + self.ValorEstimado + self.urlFoto
+            self.linha = self.AnoDaObra.rjust(4, " ") + self. MesDaObra.rjust(2, " ") + self.Estilo.rjust(15, " ") + self.NomeDaObra.rjust(20, " ") + self.AutorDaObra.rjust(20, " ") + str(self.ValorEstimado).rjust(12, " ") + self.urlFoto.ljust(100, " ")
             arquivo.write(f"\n{self.linha}")
 
 
@@ -51,13 +56,13 @@ class Obra:
             self.ValorEstimado = novoValor
             self.urlFoto = novaURL
 
-
+    def __str__(self) -> str:
+        resultado =  self.AnoDaObra + self.MesDaObra + self.Estilo + self.NomeDaObra + self.AutorDaObra + str(self.ValorEstimado) + self.urlFoto    
 
     def fecharArquivo(self):
         self.arquivinho.close()
 
-    def __str__(self) -> str:
-        pass
+
 
     def compararCom(self, outraObra, Obra) -> int:
         pass
