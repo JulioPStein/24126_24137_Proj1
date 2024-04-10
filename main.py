@@ -16,13 +16,23 @@ def SeletorDeOpcoes():
         os.system("cls") or None
         AcoesPossiveis()
         acao = input("\nDigite o número referente à ação desejada: ")
-        match acao:
-            case "0" : pass
-            case "1" : Cadastro() 
-            case "2" : Listagem()
-            case "3" : pass
-            case "4" : TrianguloPascal()
-            case "" : pass #Qualquer coisa inválida para não voltar em loop sem explicar ao usuario?
+        valorinvalido = "-"
+        if acao != "0" and acao != "1" and acao != "2" and acao != "3" and acao != "4":
+            print("Opção inválida")
+            input("Digite [enter] para continuar")
+        else:
+            match acao:
+                case "0" : Terminar()
+                case "1" : Cadastro() 
+                case "2" : Listagem()
+                case "3" : pass
+                case "4" : TrianguloPascal()
+
+def Terminar():
+    print("Obrigado pelo uso!")
+    print("Saindo da memória.")
+    input("Digite [enter] para terminar")
+    os.system("cls") or None
 
 def Cadastro():
     from tkinter import filedialog
@@ -90,12 +100,16 @@ def Listagem():
     )
 
     obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=False)
-
+    valorTotal = 0.0
+    numObras = 0
+    print("Ano  Mes Estilo          Nome da Obra         Autor da Obra        Valor        Url")
     for linha in obra.lerCamposDoArquivo():
         print(linha)
+        valorTotal += float(linha[61:73].rstrip())
+        numObras += 1
+    print(f"                 Número de obras: {numObras}                         Valor: {valorTotal:12.2f}\n")
 
-    
-
+    obra.fecharArquivo()
     input("pressione [enter] para continuar")
     os.system('cls') or None
 

@@ -7,7 +7,7 @@ class Obra:
         self.Estilo = ""
         self.ValorEstimado = 0.0 # 12 caracteres
         self.urlFoto = ""
-        self.arquivinho = ""
+        self.arquivo = ""
         self._arquivo = nomeArq
         self._abertoParaGravacao = paraGravacao
 
@@ -23,17 +23,18 @@ class Obra:
         if not self._abertoParaGravacao:
             lista = []
             self.arquivo = open(self._arquivo, "r")
-            self.linha = self.arquivo.readline()    
-            while self.linha != "":
-                self.linha = self.arquivo.readline()
-                self.AnoDaObra = self.linha[:4].rstrip()
-                self.MesDaObra = self.linha[4:6].rstrip()
-                self.Estilo = self.linha[6:21].rstrip()
-                self.NomeDaObra = self.linha[21:41].rstrip()
-                self.AutorDaObra = self.linha[41:61].rstrip()
-                self.ValorEstimado = self.linha[61:73].replace(" ", "")
-                self.urlFoto = self.linha[73:173].rstrip()
-                lista.append(str(self.AnoDaObra + self.MesDaObra + self.Estilo + self.NomeDaObra + self.AutorDaObra + str(self.ValorEstimado) + self.urlFoto))
+            linha = "-"  
+            while linha != "":
+                linha = self.arquivo.readline()
+                if linha != "":
+                    self.AnoDaObra = linha[:4]
+                    self.MesDaObra = linha[4:6]
+                    self.Estilo = linha[6:21]
+                    self.NomeDaObra = linha[21:41]
+                    self.AutorDaObra = linha[41:61]
+                    self.ValorEstimado = f"{float(linha[61:73].strip()):12.2f}"
+                    self.urlFoto = linha[73:173]
+                    lista.append(str(self.AnoDaObra + " " + self.MesDaObra + "  " + self.Estilo + " " + self.NomeDaObra + " " + self.AutorDaObra + " " + str(self.ValorEstimado.lstrip().ljust(12, " ")) + " " + self.urlFoto))
 
             return lista
 
