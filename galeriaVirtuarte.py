@@ -25,14 +25,13 @@ class Obra:
             self.arquivo = open(self._arquivo, "r")
             self.linha = self.arquivo.readline()    
             while self.linha != "":
-                
                 self.linha = self.arquivo.readline()
                 self.AnoDaObra = self.linha[:4].rstrip()
                 self.MesDaObra = self.linha[4:6].rstrip()
                 self.Estilo = self.linha[6:21].rstrip()
                 self.NomeDaObra = self.linha[21:41].rstrip()
                 self.AutorDaObra = self.linha[41:61].rstrip()
-                self.ValorEstimado = float(self.linha[61:73].rstrip())
+                self.ValorEstimado = self.linha[61:73].replace(" ", "")
                 self.urlFoto = self.linha[73:173].rstrip()
                 lista.append(str(self.AnoDaObra + self.MesDaObra + self.Estilo + self.NomeDaObra + self.AutorDaObra + str(self.ValorEstimado) + self.urlFoto))
 
@@ -41,9 +40,9 @@ class Obra:
 
     def gravarCamposNoArquivo(self):
         if self._abertoParaGravacao:
-            arquivo = open(self._arquivo, "a")
-            self.linha = self.AnoDaObra.rjust(4, " ") + self. MesDaObra.rjust(2, " ") + self.Estilo.rjust(15, " ") + self.NomeDaObra.rjust(20, " ") + self.AutorDaObra.rjust(20, " ") + str(self.ValorEstimado).rjust(12, " ") + self.urlFoto.ljust(100, " ")
-            arquivo.write(f"\n{self.linha}")
+            self.arquivo = open(self._arquivo, "a")
+            self.linha = self.AnoDaObra.ljust(4, " ") + self. MesDaObra.ljust(2, " ") + self.Estilo.ljust(15, " ") + self.NomeDaObra.ljust(20, " ") + self.AutorDaObra.ljust(20, " ") + str(self.ValorEstimado).ljust(12, " ") + self.urlFoto.ljust(100, " ")
+            self.arquivo.write(f"\n{self.linha}")
 
 
     def preencherCampos(self, novoAno, novoMes, novoAutor, novoNome, novoEstilo, novoValor, novaURL : str):
@@ -60,7 +59,7 @@ class Obra:
         resultado =  self.AnoDaObra + self.MesDaObra + self.Estilo + self.NomeDaObra + self.AutorDaObra + str(self.ValorEstimado) + self.urlFoto    
 
     def fecharArquivo(self):
-        self.arquivinho.close()
+        self.arquivo.close()
 
 
 
