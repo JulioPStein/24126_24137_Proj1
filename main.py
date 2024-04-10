@@ -1,5 +1,10 @@
 #arquivo insano
 import os
+import tkinter as tk
+
+root = tk.Tk()
+root.withdraw()
+root.attributes("-topmost", True)
 
 def AcoesPossiveis():
     print("\n\nCadastro de obras de arte .........1")
