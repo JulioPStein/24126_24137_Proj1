@@ -64,6 +64,13 @@ class Obra:
 
 
 
-    def compararCom(self, outraObra, Obra) -> int:
-        pass
+    def compararCom(self, outraObra : str) -> int:
+        tamanho1 = len(self.AnoDaObra + self.MesDaObra + self.AutorDaObra + self.NomeDaObra)
+        tamanho2 = len(outraObra)
+        if tamanho1 < tamanho2:
+            return -1
+        elif tamanho1 == tamanho2:
+            return 0
+        else:
+            return 1
     
