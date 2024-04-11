@@ -30,7 +30,7 @@ def SeletorDeOpcoes():
                 case "0" : Terminar()
                 case "1" : Cadastro() 
                 case "2" : Listagem()
-                case "3" : pass
+                case "3" : tabelaHtml()
                 case "4" : TrianguloPascal()
 
 def Terminar():
@@ -110,7 +110,7 @@ def Listagem():
     print("Ano  Mes Estilo          Nome da Obra         Autor da Obra        Valor        Url")
     for linha in obra.lerCamposDoArquivo():
         print(linha)
-        valorTotal += float(linha[61:73].rstrip())
+        valorTotal += float(linha[67:79].rstrip())
         numObras += 1
     print(f"                 Número de obras: {numObras}                         Valor: {valorTotal:12.2f}\n")
 
@@ -118,6 +118,79 @@ def Listagem():
     input("pressione [enter] para continuar")
     os.system('cls') or None
 
+def tabelaHtml():
+    from tkinter import filedialog
+    import galeriaVirtuarte, webbrowser
+
+    tiposDeArquivos = (   #VER SE SÃO ESSES  OS TIPOS DESEJADOS
+        ("Arquivos de texto", "*.txt"),
+        ("Arquivos JSON", "*.json"),
+        ("Qualquer arquivo", "*.*")
+    )
+
+    nomeDoArquivo = filedialog.askopenfilename(
+        title="Selecione o arquivo desejado",
+        initialdir= r"c:\temp",
+        multiple = False,
+        filetypes = tiposDeArquivos
+    )
+
+    obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=False)
+    totalGeral = 0.0
+     
+    for linha in obra.lerCamposDoArquivo():
+        ano = linha[0, 4]
+        mes = linha[5, 7]
+        estilo = linha[9, 24]
+        nomeObra = linha[25, 45]
+        autor = linha[46, 66]
+        valor = linha[67, 79]
+        url = linha[80, 180]
+        totalGeral += float(linha[67:79].rstrip())
+
+    valor=4
+    file_path = "obras.html"
+    html_string = f"""<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styleObras.css">
+</head>
+
+<body>
+
+    <table>
+        <tr>
+            <th colspan="6">
+                RELATÓRIO DE OBRAS DA GALERIA VIRTUAL
+            </th>
+        </tr>
+
+        <tr>
+            <td>Ano/Mês</td>
+            <td>Dados</td>
+            <td>Estilo</td>
+            <td>Autor</td>
+            <td>Valor</td>
+            <td>Imagem</td>
+        </tr>
+
+        <!--Inserir Obras-->
+        <tr>
+            <th colspan="4">Total</th>
+            <th text-align: left;>{valor}</th>
+        </tr>
+    </table>
+
+    
+
+</body>
+</html>"""
+    with open(file_path, 'w', encoding="utf-8") as html_file:
+        html_file.write(html_string)
+    webbrowser.open_new_tab(file_path)
+    html_file.close()
 
 def TrianguloPascal():
     import mat
@@ -133,3 +206,4 @@ def TrianguloPascal():
 
 if __name__ == "__main__":
     SeletorDeOpcoes()
+#1987 09  gamer           VICTORY ROYALE       Vinicius games       9999.00      qliuwsgdf -----exemplo de string concatenada na lista
