@@ -137,20 +137,6 @@ def tabelaHtml():
         filetypes = tiposDeArquivos
     )
 
-    obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=False)
-    totalGeral = 0.0
-     
-    for linha in obra.lerCamposDoArquivo():
-        ano = linha[0, 4]
-        mes = linha[5, 7]
-        estilo = linha[9, 24]
-        nomeObra = linha[25, 45]
-        autor = linha[46, 66]
-        valor = linha[67, 79]
-        url = linha[80, 180]
-        totalGeral += float(linha[67:79].rstrip())
-
-    valor=4
     file_path = "obras.html"
     html_string = f"""<!DOCTYPE html>
 <html lang="en">
@@ -178,17 +164,51 @@ def tabelaHtml():
             <td>Imagem</td>
         </tr>
 
-        <!--Inserir Obras-->
-        <tr>
-            <th colspan="4">Total</th>
-            <th text-align: left;>{valor}</th>
-        </tr>
-    </table>
+"""
 
-    
+    obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=False)
+    totalGeral = 0.0
+    totalAno = 0.0
+    anoAtual = 0
+    primeiraVez = True
 
-</body>
+    for linha in obra.lerCamposDoArquivo():
+        ano = linha[0, 4]
+        mes = linha[5, 7]
+        estilo = linha[9, 24]
+        nomeObra = linha[25, 45]
+        autor = linha[46, 66]
+        valor = linha[67, 79]
+        url = linha[80, 180]
+
+        ano = tirar0s(ano)
+
+        totalAno += float(linha[67:79].rstrip())
+        totalGeral += float(linha[67:79].rstrip())
+        if primeiraVez == True:
+            anoAtual = ano
+            primeiraVez = False
+        
+        if ano != anoAtual:
+            html_file = html_file + f"""        <tr>
+    <td colspan="4">Total</td>
+    <td>{totalAno:12.2f}</td>
+</tr>
+"""
+            totalAno = 0.0
+        html_file = html_file + f"""        <tr>
+    <td>{ano} / {mes}</td>
+    <td>{nomeObra}</td>
+    <td>{estilo}</td>
+    <td>{autor}</td>
+    <td>{valor}</td>
+    <td><img src="{url}" alt="{url}"></td>
+"""
+
+    html_file = html_file + f"""</body>
 </html>"""
+
+
     with open(file_path, 'w', encoding="utf-8") as html_file:
         html_file.write(html_string)
     webbrowser.open_new_tab(file_path)
@@ -205,6 +225,14 @@ def TrianguloPascal():
     input("pressione [enter] para continuar")
     os.system('cls') or None
         
+def tirar0s(ano):
+    anoTaOk = False
+    while anoTaOk == False:
+        if ano[0] == 0:
+            ano.replace("0", "", 1)
+        else:
+            anoTaOk = True
+    return ano
 
 if __name__ == "__main__":
     SeletorDeOpcoes()
