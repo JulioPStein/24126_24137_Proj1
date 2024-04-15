@@ -21,8 +21,11 @@ class Obra:
 
     def lerCamposDoArquivo(self):
         if not self._abertoParaGravacao:
+            import os
+            comando = f'sort {self._arquivo} /o ordenado.txt /+1'
+            os.system(comando) or None
             lista = []
-            self.arquivo = open(self._arquivo, "r")
+            self.arquivo = open("C:\\Temp\\24126_24137_Proj1\\ordenado.txt", "r")
             linha = "-"  
             while linha != "":
                 linha = self.arquivo.readline()

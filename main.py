@@ -65,9 +65,11 @@ def Cadastro():
                 print("Adicionar nova obra")
                 print("Digite 0 na pergunta abaixo para sair")
             
-            novoAno = input("Ano da conclusão da obra: ")
+            novoAno = input("Ano da conclusão da obra : ")
             
             if novoAno != "0":
+                if len(novoAno) < 4:
+                    novoAno = novoAno.rjust(4, "0")
                 novoMes = input("Mês da conclusão da obra: ")
                 novoAutor = input("Autor da obra: ")
                 novoNome = input("Nome da obra: ")
