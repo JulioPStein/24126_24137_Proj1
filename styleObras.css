@@ -1,0 +1,52 @@
+#cabeçalho {
+    background-color: #97C9FC;
+}
+
+#NomeColuna{
+    background-color: #CCFFFF;
+    text-align: center;
+}
+
+table, td, th{
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+
+.Obra:nth-child(odd) {     /*VER COMO SEMPRE A PRIMEIRA LINHA DE CADA ANO SER AMARELA*/
+    background-color:#FFFF99;
+  }
+
+.RowtotalAno{
+    background-color: #CCFFFF;
+    text-align: center;
+}
+
+.totalAno {
+    text-align: right;
+}
+
+#RowtotalGeral{
+    background-color: #99CCFF;
+    text-align: center;
+}
+
+#totalGeral{
+    text-align: right;
+}
+
+.ValorObra{
+    text-align: right;
+}
+
+.Imagem {
+    height: 100px;
+}
+
+table{
+    margin: auto;
+}
+
+td{
+    padding: 10px;
+}

@@ -25,7 +25,7 @@ class Obra:
             comando = f'sort {self._arquivo} /o ordenado.txt /+1'
             os.system(comando) or None
             lista = []
-            self.arquivo = open("C:\\Temp\\24126_24137_Proj1\\ordenado.txt", "r")
+            self.arquivo = open("ordenado.txt", "r")
             linha = "-"  
             while linha != "":
                 linha = self.arquivo.readline()

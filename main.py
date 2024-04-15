@@ -147,13 +147,13 @@ def tabelaHtml():
 <body>
 
     <table>
-        <tr>
+        <tr id="cabeçalho" >
             <th colspan="6">
                 RELATÓRIO DE OBRAS DA GALERIA VIRTUAL
             </th>
         </tr>
 
-        <tr>
+        <tr id="NomeColuna">
             <td>Ano/Mês</td>
             <td>Dados</td>
             <td>Estilo</td>
@@ -186,32 +186,35 @@ def tabelaHtml():
             primeiraVez = False
         
         if ano != anoAtual:
-            html_string = html_string + f"""        <tr>
-            <td id="totalAno" colspan="4">Total</td>
-            <td>{totalAno:12.2f}</td>
+            html_string = html_string + f"""        <tr class="RowtotalAno">
+            <td  colspan="4">Total</td>
+            <td class="totalAno">{totalAno:12.2f}</td>
+            <td> </td>
         </tr>
 """
             totalAno = 0.0
             anoAtual = ano
-        html_string = html_string + f"""        <tr>
+        html_string = html_string + f"""        <tr class="Obra">
             <td>{ano} / {mes}</td>
             <td>{nomeObra}</td>
             <td>{estilo}</td>
             <td>{autor}</td>
-            <td>{valor}</td>
-            <td><img src="{url}" alt="{url}"></td>
+            <td class="ValorObra">{valor}</td>
+            <td><img class="Imagem" src="{url}" alt="{url}"></td>
         </tr>
 """
         totalAno += float(linha[67:79].rstrip())
         totalGeral += float(linha[67:79].rstrip())
 
-    html_string = html_string + f"""        <tr>
-            <td id="totalAno" colspan="4">Total</td>
-            <td>{totalAno:12.2f}</td>
+    html_string = html_string + f"""        <tr class="RowtotalAno">
+            <td colspan="4">Total</td>
+            <td id="totalAno">{totalAno:12.2f}</td>
+            <td> </td>
         </tr>
-        <tr id="totalGeral">
+        <tr id="RowtotalGeral">
             <td colspan="4">Total Geral</td>
-            <td>{totalGeral}</td>
+            <td id="totalGeral">{totalGeral}</td>
+            <td> </td>
         </tr>
     </table>
 </body>
