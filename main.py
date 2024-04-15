@@ -246,4 +246,3 @@ def tirar0s(ano):
 
 if __name__ == "__main__":
     SeletorDeOpcoes()
-#1987 09  gamer           VICTORY ROYALE       Vinicius games       9999.00      qliuwsgdf -----exemplo de string concatenada na lista
