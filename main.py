@@ -36,8 +36,6 @@ def SeletorDeOpcoes():
 def Terminar():
     print("Obrigado pelo uso!")
     print("Saindo da memória.")
-    input("Digite [enter] para terminar")
-    os.system("cls") or None
 
 def Cadastro():
     from tkinter import filedialog
@@ -173,40 +171,52 @@ def tabelaHtml():
     primeiraVez = True
 
     for linha in obra.lerCamposDoArquivo():
-        ano = linha[0, 4]
-        mes = linha[5, 7]
-        estilo = linha[9, 24]
-        nomeObra = linha[25, 45]
-        autor = linha[46, 66]
-        valor = linha[67, 79]
-        url = linha[80, 180]
+        ano = linha[0 : 4]
+        mes = linha[5 : 7]
+        estilo = linha[9 : 24]
+        nomeObra = linha[25 : 45]
+        autor = linha[46 : 66]
+        valor = linha[67 : 79]
+        url = linha[80 : 180]
 
         ano = tirar0s(ano)
 
-        totalAno += float(linha[67:79].rstrip())
-        totalGeral += float(linha[67:79].rstrip())
         if primeiraVez == True:
             anoAtual = ano
             primeiraVez = False
         
         if ano != anoAtual:
-            html_file = html_file + f"""        <tr>
-    <td colspan="4">Total</td>
-    <td>{totalAno:12.2f}</td>
-</tr>
+            html_string = html_string + f"""        <tr>
+            <td id="totalAno" colspan="4">Total</td>
+            <td>{totalAno:12.2f}</td>
+        </tr>
 """
             totalAno = 0.0
-        html_file = html_file + f"""        <tr>
-    <td>{ano} / {mes}</td>
-    <td>{nomeObra}</td>
-    <td>{estilo}</td>
-    <td>{autor}</td>
-    <td>{valor}</td>
-    <td><img src="{url}" alt="{url}"></td>
+            anoAtual = ano
+        html_string = html_string + f"""        <tr>
+            <td>{ano} / {mes}</td>
+            <td>{nomeObra}</td>
+            <td>{estilo}</td>
+            <td>{autor}</td>
+            <td>{valor}</td>
+            <td><img src="{url}" alt="{url}"></td>
+        </tr>
 """
+        totalAno += float(linha[67:79].rstrip())
+        totalGeral += float(linha[67:79].rstrip())
 
-    html_file = html_file + f"""</body>
+    html_string = html_string + f"""        <tr>
+            <td id="totalAno" colspan="4">Total</td>
+            <td>{totalAno:12.2f}</td>
+        </tr>
+        <tr id="totalGeral">
+            <td colspan="4">Total Geral</td>
+            <td>{totalGeral}</td>
+        </tr>
+    </table>
+</body>
 </html>"""
+    
 
 
     with open(file_path, 'w', encoding="utf-8") as html_file:
