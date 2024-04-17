@@ -75,17 +75,22 @@ def Cadastro():
                 novoValor = input("Valor da obra: ")
                 novaURL = input("Url da foto: ")
 
-                obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=True)
+                if not novoAno.isnumeric() or novoMes.isnumeric() or novoValor.isnumeric():
+                    print("Algum valor digitado (ano, mês ou valor) não teve seu valor atribuido como número. \nO cadastro foi cancelado\nTente novamente.\n")
+                    cadastroCancelado = True
+        
+                else:
+                    cadastroCancelado = False
+                    obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=True)
+                    obra.preencherCampos(novoAno, novoMes, novoAutor, novoNome, novoEstilo, novoValor, novaURL)
 
-                obra.preencherCampos(novoAno, novoMes, novoAutor, novoNome, novoEstilo, novoValor, novaURL)
+                    obra.gravarCamposNoArquivo()
 
-                obra.gravarCamposNoArquivo()
-
-                print("\nObra adicionada com sucesso")
-                input("pressione [enter] para continuar")
-                os.system('cls') or None
-
-        obra.fecharArquivo()   
+                    print("\nObra adicionada com sucesso")
+                    input("pressione [enter] para continuar")
+                    os.system('cls') or None
+        if cadastroCancelado == False:
+            obra.fecharArquivo()
 
 def Listagem():
     from tkinter import filedialog
