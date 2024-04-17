@@ -76,7 +76,14 @@ def Cadastro():
                 novaURL = input("Url da foto: ")
 
                 if not novoAno.isnumeric() or novoMes.isnumeric() or novoValor.isnumeric():
-                    print("Algum valor digitado (ano, mês ou valor) não teve seu valor atribuido como número. \nO cadastro foi cancelado\nTente novamente.\n")
+                    valoresErrados = ""
+                    if not novoAno.isnumeric():
+                        valoresErrados = "- ano - "
+                    if not novoMes.isnumeric():
+                        valoresErrados += "mês - "
+                    if not novoValor.isnumeric():
+                        valoresErrados += "valor aproximado - "
+                    print(f"\nOs valores {valoresErrados} não tiveram seus valores atribuidos como número. \nO cadastro foi cancelado\nTente novamente.\n")
                     cadastroCancelado = True
         
                 else:
