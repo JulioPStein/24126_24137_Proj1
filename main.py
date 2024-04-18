@@ -75,15 +75,23 @@ def Cadastro():
                 novoValor = input("Valor da obra: ")
                 novaURL = input("Url da foto: ")
 
-                if not novoAno.isnumeric() or novoMes.isnumeric() or novoValor.isnumeric():
+                if not novoAno.isnumeric() or not novoMes.isnumeric() or not novoValor.isnumeric():
                     valoresErrados = ""
+                    quantos_valores_errados = 0
                     if not novoAno.isnumeric():
                         valoresErrados = "- ano - "
+                        quantos_valores_errados += 1
                     if not novoMes.isnumeric():
                         valoresErrados += "mês - "
+                        quantos_valores_errados += 1
                     if not novoValor.isnumeric():
                         valoresErrados += "valor aproximado - "
-                    print(f"\nOs valores {valoresErrados} não tiveram seus valores atribuidos como número. \nO cadastro foi cancelado\nTente novamente.\n")
+                        quantos_valores_errados += 1
+
+                    if quantos_valores_errados == 1:
+                        print(f"\nO valor {valoresErrados} não teve seu valor atribuído como número. \nO cadastro foi cancelado\nTente novamente.\n")
+                    else:    
+                        print(f"\nOs valores {valoresErrados} não tiveram seus valores atribuidos como número. \nO cadastro foi cancelado\nTente novamente.\n")
                     cadastroCancelado = True
         
                 else:
