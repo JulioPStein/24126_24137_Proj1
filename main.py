@@ -135,6 +135,7 @@ def Listagem():
     print(f"                 Número de obras: {numObras}                         Valor: {valorTotal:12.2f}\n")
 
     obra.fecharArquivo()
+    print(obra.__str__())
     input("pressione [enter] para continuar")
     os.system('cls') or None
 
@@ -233,7 +234,7 @@ def tabelaHtml():
         </tr>
         <tr id="RowtotalGeral">
             <td colspan="4">Total Geral</td>
-            <td id="totalGeral">{totalGeral}</td>
+            <td id="totalGeral">{totalGeral:12.2f}</td>
             <td> </td>
         </tr>
     </table>

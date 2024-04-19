@@ -59,7 +59,8 @@ class Obra:
             self.urlFoto = novaURL
 
     def __str__(self) -> str:
-        resultado =  self.AnoDaObra + self.MesDaObra + self.Estilo + self.NomeDaObra + self.AutorDaObra + str(self.ValorEstimado) + self.urlFoto    
+        resultado =  self.AnoDaObra + self.MesDaObra + self.Estilo + self.NomeDaObra + self.AutorDaObra + str(self.ValorEstimado) + self.urlFoto
+        return resultado
 
     def fecharArquivo(self):
         self.arquivo.close()

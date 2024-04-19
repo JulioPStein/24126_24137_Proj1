@@ -1,3 +1,7 @@
+body {
+    font-size: 20px;
+    text-align: center;
+}
 #cabeçalho {
     background-color: #97C9FC;
 }
@@ -40,7 +44,9 @@ table, td, th{
 }
 
 .Imagem {
-    height: 100px;
+    margin: auto;
+    width: auto;
+    height: 150px;
 }
 
 table{
