@@ -135,7 +135,6 @@ def Listagem():
     print(f"                 Número de obras: {numObras}                         Valor: {valorTotal:12.2f}\n")
 
     obra.fecharArquivo()
-    print(obra.__str__())
     input("pressione [enter] para continuar")
     os.system('cls') or None
 
