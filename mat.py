@@ -19,8 +19,8 @@ class Matematica:
         import mat
         mate = mat.Matematica(self._numeroBase)
         L = self._numeroBase
-        k = 0
-        n = 0
+        k = 0 # começa em 0
+        n = 0 # //
         linhaAtual = 1
         lista = []
         while n < L:

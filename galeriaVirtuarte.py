@@ -63,7 +63,8 @@ class Obra:
         return resultado
 
     def fecharArquivo(self):
-        self.arquivo.close()
+        if self.arquivo == open:
+            self.arquivo.close()
 
 
 
@@ -76,4 +77,3 @@ class Obra:
             return 0
         else:
             return 1
-    

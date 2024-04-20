@@ -54,6 +54,9 @@ def Cadastro():
         filetypes = tiposDeArquivos
     )
     if nomeDoArquivo != "":
+        cadastroCancelado = False
+        obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=True)
+        print(f"Gravando no arquivo {nomeDoArquivo}")
         novoAno = "-"
         while novoAno != "0":
 
@@ -96,7 +99,6 @@ def Cadastro():
         
                 else:
                     cadastroCancelado = False
-                    obra = galeriaVirtuarte.Obra(nomeDoArquivo, paraGravacao=True)
                     obra.preencherCampos(novoAno, novoMes, novoAutor, novoNome, novoEstilo, novoValor, novaURL)
 
                     obra.gravarCamposNoArquivo()
