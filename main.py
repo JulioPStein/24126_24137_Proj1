@@ -261,13 +261,8 @@ def TrianguloPascal():
     os.system('cls') or None
         
 def tirar0s(ano):
-    anoTaOk = False
-    while anoTaOk == False:
-        if ano[0] == 0:
-            ano.replace("0", "", 1)
-        else:
-            anoTaOk = True
-    return ano
+    ano = int(ano) # tira os 0s da esquerda
+    return str(ano) # volta a ser string
 
 if __name__ == "__main__":
     SeletorDeOpcoes()

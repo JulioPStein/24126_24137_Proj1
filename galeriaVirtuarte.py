@@ -37,7 +37,7 @@ class Obra:
                     self.AutorDaObra = linha[41:61]
                     self.ValorEstimado = f"{float(linha[61:73].strip()):12.2f}"
                     self.urlFoto = linha[73:173]
-                    lista.append(str(self.AnoDaObra + " " + self.MesDaObra + "  " + self.Estilo + " " + self.NomeDaObra + " " + self.AutorDaObra + " " + str(self.ValorEstimado.lstrip().ljust(12, " ")) + " " + self.urlFoto))
+                    lista.append(str(str(int(self.AnoDaObra)) + " " + self.MesDaObra + "  " + self.Estilo + " " + self.NomeDaObra + " " + self.AutorDaObra + " " + str(self.ValorEstimado.lstrip().ljust(12, " ")) + " " + self.urlFoto))
             return lista
 
 
