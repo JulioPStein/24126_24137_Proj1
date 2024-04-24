@@ -133,6 +133,8 @@ def Listagem():
     for linha in obra.lerCamposDoArquivo():
         print(linha)
         valorTotal += float(linha[67:79].rstrip())
+
+        
         numObras += 1
     print(f"                 Número de obras: {numObras}                         Valor: {valorTotal:12.2f}\n")
 
