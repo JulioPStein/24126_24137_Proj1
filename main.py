@@ -146,7 +146,7 @@ def tabelaHtml():
     from tkinter import filedialog
     import galeriaVirtuarte, webbrowser
 
-    tiposDeArquivos = (   #VER SE SÃO ESSES  OS TIPOS DESEJADOS
+    tiposDeArquivos = (
         ("Arquivos de texto", "*.txt"),
         ("Arquivos JSON", "*.json"),
         ("Qualquer arquivo", "*.*")
